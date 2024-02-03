@@ -1,0 +1,12 @@
+.recipe-list-item {
+    border: 1px solid purple;
+    word-wrap: break-word;
+}
+
+.ingrediant-item {
+    list-style: none;
+}
+
+.favourite-button {
+    margin: 10px;
+} 

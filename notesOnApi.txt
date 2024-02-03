@@ -1,0 +1,10 @@
+GET Recipes 
+
+https://api.edamam.com/api/recipes/v2
+
+To add ingrediant keywords we add them to the q-section of our string. 
+
+another query parameter we can use is 
+Filter by number of ingredients (MIN+, MIN-MAX, MAX),
+where MIN and MAX are integer numbers. Example: ingr=5-8+
+

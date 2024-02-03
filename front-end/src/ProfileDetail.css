@@ -1,0 +1,21 @@
+.profile-img {
+    border-radius: 50%;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .amatic {
+    font-family: "Amatic";
+    font-size: 2em;
+    margin: 5px;
+  }
+
+  .amatic-header {
+    font-family: "Amatic";
+  }
+
+  @font-face {
+    font-family: "Amatic";   /*Can be any text*/
+    src: local("AmaticSC-Regular"),
+      url("./fonts/AmaticSC-Regular.ttf") format("truetype");
+  }

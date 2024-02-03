@@ -1,0 +1,18 @@
+.navlink-amatic {
+    font-family: "Amatic";
+    font-weight: bold;
+   
+}
+
+.navlink-amatic:hover {
+    font-size: 2em;
+    transition: 0.5s;
+   
+   
+}
+
+@font-face {
+    font-family: "Amatic";   /*Can be any text*/
+    src: local("AmaticSC-Regular"),
+      url("./fonts/AmaticSC-Regular.ttf") format("truetype");
+  }
