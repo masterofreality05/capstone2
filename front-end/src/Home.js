@@ -1,5 +1,5 @@
 
-import SearchRecipeForm from "./SearchRecipeForm"
+import SearchRecipeForm from "./forms/SearchRecipeForm"
 import RecipeList from "./RecipeList"
 import { useState } from "react"
 

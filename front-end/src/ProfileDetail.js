@@ -1,4 +1,4 @@
-import NewFridgeItemForm from "./NewFridgeItemForm";
+import NewFridgeItemForm from "./forms/NewFridgeItemForm";
 import "./ProfileDetail.css"
 import recipeAPISearch from "./helpers/searchRecipesAPI";
 import { useState, useContext } from "react";

@@ -1,5 +1,5 @@
-import RegisterForm from "./Registerform";
-import LoginForm from "./LoginForm";
+import RegisterForm from "./forms/Registerform";
+import LoginForm from "./forms/LoginForm";
 const LoginOrRegister = () => {
     return(
         <>

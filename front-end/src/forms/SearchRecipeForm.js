@@ -1,49 +1,44 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {useFormik} from 'formik';
-import basicLoginSchema from './schemas/loginSchema';
+import searchRecipeSchema from '../schemas/searchrecipeschema';
 import axios from 'axios';
-import AppContext from './AppContext';
-const inputs = ["username", "password"]
+import addSearchedToDB from '../helpers/addSearchResultsDB';
+import recipeAPISearch from '../helpers/searchRecipesAPI';
+const inputs = ["ingrediants"]
 const initalializers =  {
-    username:"",
-    password:"",
+    ingrediants: "",
 }
 
-function LoginForm(props){
-
-    let {setUser} = useContext(AppContext) 
+function SearchRecipeForm({setSearchedRecipes}){
     let [failedValidation, setFailedValidation] = useState(false)
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        console.log("running hansdlesubmit")
         if (Object.keys(errors).length > 0){
             alert("please fill out all fields")
             setFailedValidation(true)
         } else {
-            console.log("running our login user handle submit")
             setFailedValidation(false)
-            let loggedIn = await axios.post(
-                'http://localhost:3001/auth/token'
-                ,  
-                    {
-                        ...values
-                    },    
-            )
-            console.log(loggedIn.data)
-            setUser({username: values.username,
-                token :loggedIn.data.token})
-        }         
-            }
+            console.log("handling submit of search recipe form")
+            console.log("submitting recipe form", values.ingrediants)
+            let recipes = await recipeAPISearch(values.ingrediants)
+          
+              setSearchedRecipes(recipes)
+            
+             
+        }    
+    }    
+            
 
     let {errors, touched, values, handleChange, handleBlur} = useFormik({
         initialValues: initalializers,
-        validationSchema: basicLoginSchema,
-       
+        validationSchema: searchRecipeSchema,
     });
 
     return(
         <>
-        <h1>Login to existing user account</h1>
+        <h1>Search for a recipe with some ingrediants</h1>
         <form autoComplete='off' onSubmit={handleSubmit}>
         {inputs.map(word => 
         <div className='form-group'>
@@ -67,4 +62,5 @@ function LoginForm(props){
         </>
     )
 } 
- export default LoginForm;
+
+ export default SearchRecipeForm;

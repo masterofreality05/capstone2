@@ -78,6 +78,7 @@ router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, nex
 router.post("/adduseringrediant", async function(req, res, next){
   try {
     const {ingrediants, userID} = req.body
+    console.log("ingrediants are", ingrediants)
     let Individual_ingrediants = ingrediants.split(" ")
     for(let ingrediant of Individual_ingrediants){
       const newIngrediant = await Ingrediant.addNew(ingrediant)

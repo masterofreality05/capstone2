@@ -1,21 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useState} from 'react';
 import {useFormik} from 'formik';
-import basicRegisterSchema from './schemas/registerschema';
+import userIngrediantSchema from '../schemas/useringrediantschema';
 import axios from 'axios';
-import AppContext from './AppContext';
-
+const inputs = ["ingrediants"]
 const initalializers =  {
-    username:"",
-    password:"",
-    firstName:"",
-    lastName:"",
-    email:"",
-    profile_img: ""
+    ingrediants:"",
 }
 
-const inputs = ["username", "password", "firstName", "lastName", "email", "profile_img"]
-function RegisterForm(props){
-    let {setUser} = useContext(AppContext) 
+function NewFridgeItemForm({u, setFridgeItems}){
+    console.log("inside our fridge form, looking for user id;", u.id) //defined
+    const userID = u.id
     let [failedValidation, setFailedValidation] = useState(false)
 
     const handleSubmit = async(e) => {
@@ -25,24 +19,25 @@ function RegisterForm(props){
             setFailedValidation(true)
         } else {
             setFailedValidation(false)
-            let newUser = await axios.post(
-                'http://localhost:3001/auth/register'
-                ,
-                    {...values},
-            )
-            setUser({username: values.username,
-                token :newUser.data.token})
+            await axios.post(
+                'http://localhost:3001/users/adduseringrediant'
+                ,  
+                    {
+                        ...values,
+                        userID
+                    },    
+            )  
+            setFridgeItems(u.ingrediants)
         }         
             }
 
     let {errors, touched, values, handleChange, handleBlur} = useFormik({
         initialValues: initalializers,
-        validationSchema: basicRegisterSchema,  
+        validationSchema: userIngrediantSchema,
     });
-
     return(
         <>
-        <h1>Register a new user</h1>
+        <h1>Add a new item to your fridge</h1>
         <form autoComplete='off' onSubmit={handleSubmit}>
         {inputs.map(word => 
         <div className='form-group'>
@@ -60,9 +55,10 @@ function RegisterForm(props){
             </label>
             </div>  
             )}
+      
         <button type='submit'>Submit!</button>
         </form>
         </>
     )
 } 
- export default RegisterForm;
+ export default NewFridgeItemForm;

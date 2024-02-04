@@ -1,3 +1,11 @@
+\echo 'Delete and recreate whats in my fridge db?'
+\prompt 'Return for yes or control-C to cancel > ' foo
+
+DROP DATABASE fridge;
+CREATE DATABASE fridge;
+\connect fridge 
+
+
 CREATE TABLE ingrediants (
   id SERIAL PRIMARY KEY,
   item_name TEXT NOT NULL
@@ -33,7 +41,7 @@ CREATE TABLE users (
 CREATE TABLE users_recipes(
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
-  recipe_id TEXT REFERENCES recipes(id) 
+  recipe_id INT EFERENCES recipes(id) 
 );
 
 CREATE TABLE users_ingrediants(
