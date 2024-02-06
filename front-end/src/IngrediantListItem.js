@@ -11,19 +11,15 @@ const IngrediantListItem = ({i, u}) => {
         setFridgeItems(u.ingrediants)
     }
     const handleAdd = async(ingrediants, userID) => {
-
+        console.log("handling add" , ingrediants)
         await axios.post(
             'http://localhost:3001/users/adduseringrediant'
             ,  
                 {
                     ingrediants,
                     userID
-                    
-                    
-                   
                 },    
         )  
-
         setFridgeItems(u.ingrediants)
     }
     let ingrediantList = [];
@@ -31,11 +27,6 @@ const IngrediantListItem = ({i, u}) => {
         ingrediantList.push(i[0])
     }
     let userHas = ingrediantList.includes(i[0])
-      if(userHas){
-        console.log("this item is in the users ingrediants")
-    } else {
-        console.log("not in users ingrediants")
-    }
     let remove = <li className="list-group-item amatic ingrediant-item">{i[0]}<button type="button" className="btn-close btn-margin" aria-label="Close" onClick={() => handleDelete(i[1], u.id)}></button></li>
     let add = <li className="list-group-item amatic ingrediant-item">{i[0]}<button type="button" className="btn-success btn-margin" aria-label="Close" onClick={() => {handleAdd(i[0], u.id)}}>Add to Fridge</button></li>
 

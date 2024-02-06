@@ -1,13 +1,14 @@
 import './App.css';
 import Navbar from './Navbar';
 import {Routes, Route } from 'react-router-dom'
+import axios from 'axios';
 import Home from './Home';
 import LoginOrRegister from './LoginOrRegister';
 import NotFound from './NotFound';
-import RecipeList from './RecipeList';
+import RecipePage from './RecipePage';
 import Profile from './Profile';
 import AppContext from './AppContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BrowseIngrediants from './BrowseIngediants';
 import Logout from './Logout';
 import "./fonts/AmaticSC-Regular.ttf"
@@ -22,9 +23,10 @@ function App() {
   //we can send the token with each axios call to localhost:3001?
   //we set user to the value of the token. allowing authorization for things such as user.get
   let [user, setUser] = useState(null)
-  let [recipesInDB, setRecipesInDb] = useState([])
-  console.log("rendering our App component, setting user", user)
-  //TO DO add custom 404 for any unmatched route
+
+
+
+
   return (
     <>
     <AppContext.Provider value={{user, setUser}}>
@@ -35,7 +37,7 @@ function App() {
       <Route path="/" element={<Home/>}></Route>
       <Route path="loginregister" element={<LoginOrRegister/>}></Route>
       <Route path="ingrediants" element={<BrowseIngrediants/>}></Route>
-      <Route path="recipes" element={<RecipeList searchedRecipes={recipesInDB}/>}></Route>
+      <Route path="recipes" element={<RecipePage/>}></Route>
       <Route path="profile" element={<Profile/>}></Route>
       <Route path="logout" element={<Logout/>}></Route>
       <Route path="*" element={<NotFound/>}></Route>

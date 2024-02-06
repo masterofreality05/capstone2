@@ -10,7 +10,7 @@ const {
 class Ingrediant {
 
   static async addNew(itemName) {
-    console.log("running ingrediant.addnew")
+    console.log("running ingrediant.addnew", itemName)
     const duplicateCheck = await db.query(
           `SELECT id, item_name
            FROM ingrediants

@@ -1,23 +1,28 @@
 
 import "./RecipeListItem.css"
+import addRecipeFavourite from "./helpers/AddRecipeFavourite";
 
 
-const RecipeListItem = ({recipeData}) => {
-    console.log("rendering recipe list item", recipeData)
+
+const RecipeListItem = ({recipeData, userID}) => {
+    let r = recipeData.recipe;
+    console.log(r)
+    //addRecipeFavourite(r.label, userID
     return(
         <>
         <li>
         <div className="recipe-list-item">
         <h1>{recipeData.label}</h1>
-        <img src={recipeData.image}></img>
+        <img src={r.image}></img>
         <br></br>
-        <a href={recipeData.url}>visit this recipe</a>
+        <a href={r.url}>visit this recipe</a>
         <ul>
-        {recipeData.ingredients.map(i => 
+        {r.ingredients.map(i => 
             <li className="ingrediant-item">{i.food}</li>
             )}
             </ul>
-        <button className="favourite-button" onClick={console.log("clicked") }>Add to Favourites</button>
+        <br></br>
+        <button className="favourite-button" onclick={() => console.log("hireir")}>Add to Favourites</button>
         </div>
         </li>
         </>

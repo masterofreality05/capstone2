@@ -20,9 +20,11 @@ function SearchRecipeForm({setSearchedRecipes}){
             setFailedValidation(true)
         } else {
             setFailedValidation(false)
-            console.log("handling submit of search recipe form")
-            console.log("submitting recipe form", values.ingrediants)
             let recipes = await recipeAPISearch(values.ingrediants)
+         
+            for(let recipe of recipes){
+                addSearchedToDB(recipe.recipe)
+            }
           
               setSearchedRecipes(recipes)
             

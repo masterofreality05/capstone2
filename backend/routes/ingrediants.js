@@ -9,12 +9,7 @@ const router = express.Router();
 /**This route will be used to get all the recipes saved to the favourites of a user */
 router.get("/", async function (req, res, next) {
   try {
-      //commented out for the moment ensureCorrectUserOrAdmin
-      console.log("running our get all ingrediants route")
-      let foundIngredient = await Ingrediant.findAll()
-      console.log("what is foundIngrediant", foundIngredient)
-      console.log("still in router.get")
-     
+      let foundIngredient = await Ingrediant.findAll()  
       return res.json(foundIngredient)
   } catch (err) {
     return next(err);
@@ -43,5 +38,16 @@ router.get("/:ingredient", async function (req, res, next) {
       return next(err);
     } }
   );
+
+  router.post("/addingrediant", async function(req, res, next){
+    try {
+      const {addName} = req.body
+        const newIngrediant = await Ingrediant.addNew(addName)
+        return res.json(newIngrediant)
+      }
+     catch(err){
+      return next(err);
+    }
+  })
 
 module.exports = router;

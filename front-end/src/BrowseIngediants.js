@@ -12,10 +12,10 @@ const BrowseIngrediants = () => {
     const [userData, setUserData] = useState(null)
     console.log("Browser ingrediants component", userData)
 
+
     useEffect(() => {
         async function getAllIngrediants()  {
             let results = await axios.get("http://localhost:3001/ingrediants/")
-            console.log("what are our results", results) //doesnt seem to want to wrk
             let IngrediantList = []
             for(let row of results.data){
                 IngrediantList.push([ row.item_name, row.id])
@@ -23,7 +23,6 @@ const BrowseIngrediants = () => {
             if(user !== null) {
                 console.log("getting user")
                 getUser(user, setUserData)}
-            
             setAllIngrediants(IngrediantList)
         } 
             async function getUser(){
@@ -37,25 +36,18 @@ const BrowseIngrediants = () => {
             }  
         getUser()
         getAllIngrediants()
-    },[]
+    },[fridgeItems]
     )
-//<IngrediantListItem i={i} u={userData}/>
+
     return(
         <>
           <ul className="list-group">
-
         <UserContext.Provider value={{userData, setFridgeItems}}>
         {allIngrediants.map(i => 
         <IngrediantListItem i={i} u={userData !== null? userData:{ingrediants:[]}}/>
-       
-        
-       
         )}
          </UserContext.Provider>
-      
-
         </ul>
-   
         </>
     )
         }

@@ -6,51 +6,10 @@ const {
   BadRequestError,
   UnauthorizedError,
 } = require("../expressError");
-
 /** Related functions for recipes. */
 
 class Recipe {
-  /** authenticate user with username, password.
-   *
-   * Returns { username, first_name, last_name, email, is_admin }
-   *
-   * Throws UnauthorizedError is user not found or wrong password.
-   **/
 
-  static async authenticate(username, password) {
-    // try to find the user first
-    const result = await db.query(
-          `SELECT username,
-                  password,
-                  first_name AS "firstName",
-                  last_name AS "lastName",
-                  email,
-                  is_admin AS "isAdmin"
-           FROM users
-           WHERE username = $1`,
-        [username],
-    );
-
-    const user = result.rows[0];
-
-    if (user) {
-      // compare hashed password to a new hash from password
-      const isValid = await bcrypt.compare(password, user.password);
-      if (isValid === true) {
-        delete user.password;
-        return user;
-      }
-    }
-
-    throw new UnauthorizedError("Invalid username/password");
-  }
-
-  /** Register user with data.
-   *
-   * Returns { username, firstName, lastName, email, isAdmin }
-   *
-   * Throws BadRequestError on duplicates.
-   **/
   static async addNew(label, link, image_url) {
     console.log("running recipe.addNew, label:",label, "link:", link, "image:", image_url)
     const duplicateCheck = await db.query(
@@ -86,12 +45,14 @@ class Recipe {
    **/
 
   static async findAll() {
+    console.log("running our find all class method")
     const result = await db.query(
           `SELECT *
            FROM recipes
-           ORDER BY username`,
+          `,
     );
-    return result.rows;
+   
+    return result;
   }
 
   /** Given a username, return data about user.

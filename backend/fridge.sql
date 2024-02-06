@@ -41,7 +41,7 @@ CREATE TABLE users (
 CREATE TABLE users_recipes(
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
-  recipe_id INT EFERENCES recipes(id) 
+  recipe_id INT REFERENCES recipes(id) 
 );
 
 CREATE TABLE users_ingrediants(

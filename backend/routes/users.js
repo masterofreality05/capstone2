@@ -61,8 +61,9 @@ router.get("/", ensureAdmin, async function (req, res, next) {
  * Authorization required: admin or same user-as-:username
  **/
 
-router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
+router.get("/:username", async function (req, res, next) {
   try {
+    console.log("awaiting user.get model", req.params.username)
     const user = await User.get(req.params.username);
     return res.json({ user });
   } catch (err) {
@@ -79,16 +80,31 @@ router.post("/adduseringrediant", async function(req, res, next){
   try {
     const {ingrediants, userID} = req.body
     console.log("ingrediants are", ingrediants)
-    let Individual_ingrediants = ingrediants.split(" ")
-    for(let ingrediant of Individual_ingrediants){
-      const newIngrediant = await Ingrediant.addNew(ingrediant)
+
+      const newIngrediant = await Ingrediant.addNew(ingrediants)
       const newUserIngrediant = await User.addIngrediant(newIngrediant.id, userID)
       return res.json(newUserIngrediant)
     }
-  } catch(err){
+   catch(err){
     return next(err);
   }
 })
+
+router.post("/adduserrecipe", async function(req, res, next){
+  try {
+    
+    const {recipe, userID} = req.body
+    console.group("what is recipe", recipe)
+
+      const newFavoriteRecipe = await User.addRecipe(recipe, userID)
+      return res.json(newFavoriteRecipe)
+    }
+   catch(err){
+    return next(err);
+  }
+})
+
+
 
 router.post("/removeingrediant", async function(req, res, next){
   try {

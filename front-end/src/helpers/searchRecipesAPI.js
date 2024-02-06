@@ -2,6 +2,7 @@ import axios from "axios"
 
 const recipeAPISearch = async (ingrediants) => {
   var params = new URLSearchParams();
+  console.log("heres our recipeAPI search")
   params.append("type", "public")
   params.append("app_id", "2e6e8f4a")
   params.append("app_key", "83f73c85ba0e67cee7621afc8e18c060")

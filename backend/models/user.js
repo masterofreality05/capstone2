@@ -15,7 +15,6 @@ const { BCRYPT_WORK_FACTOR } = require("../config.js");
 
 class User {
   /** authenticate user with username, password.
-   *
    * Returns { username, first_name, last_name, email, is_admin }
    *
    * Throws UnauthorizedError is user not found or wrong password.
@@ -23,6 +22,7 @@ class User {
 
   static async authenticate(username, password) {
     // try to find the user first
+    console.log("inside out user.authenticate model method")
     const result = await db.query(
           `SELECT username,
                   password,
@@ -38,10 +38,11 @@ class User {
     const user = result.rows[0];
 
     if (user) {
-      // compare hashed password to a new hash from password
+
       const isValid = await bcrypt.compare(password, user.password);
       if (isValid === true) {
         delete user.password;
+        console.log("authorized")
         return user;
       }
     }
@@ -143,6 +144,7 @@ class User {
     //JOIN ingrediants I ON i.id = ui.ingrediant_id;
     //`)
     const user = userRes.rows[0];
+    console.log("heres our user", user)
     const ingrediants = await db.query(`SELECT i.item_name, i.id FROM ingrediants i
     JOIN users_ingrediants ui ON i.id = ui.ingrediant_id WHERE ui.user_id = $1`,[user.id])
 
@@ -190,6 +192,21 @@ class User {
     RETURNING user_id, ingrediant_id`,[userID, ingrediantID])
 
     return IngrediantUserRelation.rows[0]
+
+
+  }
+
+  static async addRecipe(recipeID, userID){ 
+    console.log("what is recipeID", recipeID)
+    const recipeUserRelation = await db.query(`
+    INSERT INTO users_recipes 
+    (user_id,
+    recipe_id)
+    VALUES
+    ($1, $2)
+    RETURNING user_id, recipe_id`,[userID, recipeID])
+
+    return recipeUserRelation.rows[0]
 
 
   }
