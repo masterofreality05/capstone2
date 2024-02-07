@@ -9,7 +9,6 @@ const initalializers =  {
     instructions:"",
 }
 const inputs = ["title", "ingrediants", "instructions"]
-
 function NewRecipeForm(props){
     let [failedValidation, setFailedValidation] = useState(false)
     const handleSubmit = async(e) => {
@@ -19,9 +18,7 @@ function NewRecipeForm(props){
             setFailedValidation(true)
         } else {
             setFailedValidation(false)
-            console.log("running handle submit")
-       
-            let newRecipe = await axios.post(
+            await axios.post(
                 'http://localhost:3001/recipes/add'
                 ,
                     {

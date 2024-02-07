@@ -3,16 +3,12 @@ import IngrediantListItem from "./IngrediantListItem";
 import axios from "axios";
 import AppContext from "./AppContext";
 import UserContext from "./UserContext";
-import getUser from "./helpers/getUser";
 
 const BrowseIngrediants = () => {
     const [allIngrediants, setAllIngrediants] = useState([])
     let {user} = useContext(AppContext)
     let [fridgeItems, setFridgeItems] = useState()
     const [userData, setUserData] = useState(null)
-    console.log("Browser ingrediants component", userData)
-
-
     useEffect(() => {
         async function getAllIngrediants()  {
             let results = await axios.get("http://localhost:3001/ingrediants/")
@@ -21,7 +17,6 @@ const BrowseIngrediants = () => {
                 IngrediantList.push([ row.item_name, row.id])
             }
             if(user !== null) {
-                console.log("getting user")
                 getUser(user, setUserData)}
             setAllIngrediants(IngrediantList)
         } 
@@ -51,6 +46,5 @@ const BrowseIngrediants = () => {
         </>
     )
         }
-
 
 export default BrowseIngrediants;

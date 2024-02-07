@@ -10,7 +10,6 @@ const {
 class Ingrediant {
 
   static async addNew(itemName) {
-    console.log("running ingrediant.addnew", itemName)
     const duplicateCheck = await db.query(
           `SELECT id, item_name
            FROM ingrediants
@@ -18,7 +17,6 @@ class Ingrediant {
         [itemName],
     );
     if (duplicateCheck.rows[0]) {
-      console.log("ingrediant alread in the database", duplicateCheck.rows[0].id)
       return duplicateCheck.rows[0]
   
     } else {
@@ -36,12 +34,9 @@ class Ingrediant {
   }
 
   /** Find all recipes.
-   *
-
    **/
 
   static async findAll() {
-    console.log("running ingrediant.findAll") // not running
     const result = await db.query(
           `SELECT *
            FROM ingrediants
@@ -52,9 +47,6 @@ class Ingrediant {
   }
 
   /** Given a item_name, return data about an ingrediant.
-
-   *  
-   *
    * Throws NotFoundError if user not found.
    **/
 
@@ -85,10 +77,7 @@ class Ingrediant {
    *
    * This is a "partial update" --- it's fine if data doesn't contain
    * all the fields; this only changes provided ones.
-   *
- 
-   *
-   *
+
    * Throws NotFoundError if not found.
    *
    */

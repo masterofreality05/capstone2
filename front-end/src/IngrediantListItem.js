@@ -11,7 +11,6 @@ const IngrediantListItem = ({i, u}) => {
         setFridgeItems(u.ingrediants)
     }
     const handleAdd = async(ingrediants, userID) => {
-        console.log("handling add" , ingrediants)
         await axios.post(
             'http://localhost:3001/users/adduseringrediant'
             ,  

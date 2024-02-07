@@ -20,10 +20,10 @@ router.get("/", async function (req, res, next) {
 
 /**This route will be used to get the recipes saved to the favourites of a user */
 router.get("/:recipe", async function (req, res, next) {
-    try {
+    try{
         //commented out for the moment ensureCorrectUserOrAdmin
-        let userRecipes = Recipe.get()
-        return userRecipes.data
+        let userRecipes = await Recipe.get(req.params.recipe)
+        return res.json(userRecipes.data)
     } catch (err) {
       return next(err);
     }

@@ -7,13 +7,19 @@ import IngrediantListItem from "./IngrediantListItem";
 import UserContext from "./UserContext";
 
 const ProfileDetail = ({u}) => {
+    console.log("inside profile detail", u) //working 
     const {userData, setFridgeItems} = useContext(UserContext)
     const [searchedRecipes, setSearchedRecipes] = useState(null)
     const [ingrediants, setIngrediants] = useState(u.ingrediants)
     const handleFridgeSearch = async() => {
-        const recipes = await recipeAPISearch(u.ingrediants)
+        let searching = [];
+        for(let i of u.ingrediants){
+            searching.push(i[0])
+        }
+        const recipes = await recipeAPISearch(searching.join(" "))
         setSearchedRecipes(recipes)
     }
+  
     return(
         <>
         <p>{u.username}</p>

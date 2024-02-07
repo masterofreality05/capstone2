@@ -4,10 +4,9 @@ import addRecipeFavourite from "./helpers/AddRecipeFavourite";
 
 
 
-const RecipeListItem = ({recipeData, userID}) => {
+const RecipeListItem = ({recipeData, user}) => {
     let r = recipeData.recipe;
-    console.log(r)
-    //addRecipeFavourite(r.label, userID
+
     return(
         <>
         <li>
@@ -22,7 +21,7 @@ const RecipeListItem = ({recipeData, userID}) => {
             )}
             </ul>
         <br></br>
-        <button className="favourite-button" onclick={() => console.log("hireir")}>Add to Favourites</button>
+        <button className="favourite-button" onClick={() => addRecipeFavourite(r, user)}>Add to Favourites</button>
         </div>
         </li>
         </>

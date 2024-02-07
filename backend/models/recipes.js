@@ -11,7 +11,6 @@ const {
 class Recipe {
 
   static async addNew(label, link, image_url) {
-    console.log("running recipe.addNew, label:",label, "link:", link, "image:", image_url)
     const duplicateCheck = await db.query(
           `SELECT id, label
            FROM recipes
@@ -45,7 +44,6 @@ class Recipe {
    **/
 
   static async findAll() {
-    console.log("running our find all class method")
     const result = await db.query(
           `SELECT *
            FROM recipes
@@ -62,16 +60,16 @@ class Recipe {
    *
    * Throws NotFoundError if user not found.
    **/
-  static async get(id) {
+  static async get(label) {
     const recipeRes = await db.query(
           `SELECT *
            FROM recipes
-           WHERE id = $1`,
-        [id],
+           WHERE label = $1`,
+        [label],
     );
-    const user = userRes.rows[0];
-    if (!user) throw new NotFoundError(`No user: ${username}`);
-    return user;
+    const recipe = recipeRes.rows[0];
+    if (!recipe) throw new NotFoundError(`No recipe: ${label}`);
+    return recipe;
   }
   /** Update recipe data with `data`.
    *
@@ -128,12 +126,10 @@ class Recipe {
   }
   /**Add new recipe-ingrediant many to many relationship */
   static async addNewIngrediantRelation(recipe_id, ingrediant_id){
-    console.log("running a new relation between ingrediant and recipe")
     let result = await db.query(   
         `INSERT INTO ingrediants_recipes(ingrediant_id, recipe_id)VALUES($1, $2)`,[ingrediant_id,recipe_id]
     )
     const newRelation = result.rows[0];
-    console.log("succesfully added relation", newRelation)
     return newRelation
   }
 }

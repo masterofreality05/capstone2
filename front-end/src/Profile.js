@@ -3,15 +3,14 @@ import axios from "axios";
 import AppContext from "./AppContext";
 import ProfileDetail from "./ProfileDetail";
 import UserContext from "./UserContext";
-/**A JWT needs to be stored in a safe place inside the user’s browser. 
- * We already established that storing sensitive data inside 
- * localStorage is a bad idea. To reiterate, whatever you do, 
- * don’t store a JWT in localStorage (or sessionStorage). */
+
 const Profile = () => {
     let {user} = useContext(AppContext)
     let[userData, setUserData] = useState(null)
     let [fridgeItems, setFridgeItems] = useState()
+
     useEffect(() => {
+        
         async function getUser(){
             if(user !== null){
                 const config = { headers: { Authorization: `Bearer ${user.token}`}};

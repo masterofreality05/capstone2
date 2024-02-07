@@ -29,7 +29,9 @@ function LoginForm(){
             )
             console.log(loggedIn.data)
             let user = await axios.get(`http://localhost:3001/users/${values.username}`)
+            console.log(user.data.user.id)
             setUser({username: values.username,
+                id: user.data.user.id,
                 token :loggedIn.data.token})
         }         
             }

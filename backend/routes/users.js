@@ -94,8 +94,7 @@ router.post("/adduserrecipe", async function(req, res, next){
   try {
     
     const {recipe, userID} = req.body
-    console.group("what is recipe", recipe)
-
+    console.log("!!!!!!!!!", userID) //undefined
       const newFavoriteRecipe = await User.addRecipe(recipe, userID)
       return res.json(newFavoriteRecipe)
     }

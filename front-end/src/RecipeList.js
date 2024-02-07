@@ -6,11 +6,12 @@ import appContext from "./AppContext"
 
 const RecipeList = ({searchedRecipes}) => {
     let user = useContext(appContext)
+    console.log("recipe list", searchedRecipes)
     return(
         <>
           <ul>
           {searchedRecipes.map(r => 
-               <RecipeListItem recipeData={r} userID={user}/>   
+               <RecipeListItem recipeData={r} user={user}/>   
             )} 
          </ul> 
          {!user === null?<NewRecipeForm/>:<p>You must be logged in to create a new recipe</p> }

@@ -11,9 +11,7 @@ const userRegisterSchema = require("../schemas/userRegister.json");
 const { BadRequestError } = require("../expressError");
 
 /** POST /auth/token:  { username, password } => { token }
- *
  * Returns JWT token which can be used to authenticate further requests.
- *
  * Authorization required: none
  */
 
@@ -26,7 +24,6 @@ router.post("/token", async function (req, res, next) {
     }
 
     const { username, password } = req.body;
-    console.log("inside our token post request")
     const user = await User.authenticate(username, password);
     const token = createToken(user);
     return res.json({ token });
@@ -45,7 +42,6 @@ router.post("/token", async function (req, res, next) {
  */
 router.post("/register", async function (req, res, next) {
   try {
-    console.log("running our register route", req.body)
     const validator = jsonschema.validate(req.body, userRegisterSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);

@@ -1,14 +1,8 @@
 
 import "./RecipeListItem.css"
 import addRecipeFavourite from "./helpers/AddRecipeFavourite";
-import AppContext from "./AppContext";
-import { useContext } from "react";
 
-const SavedRecipeItem = ({recipeData, user}) => {
-    console.log("what is saved item", recipeData) 
-
-    console.log("What is user", user)
-    
+const SavedRecipeItem = ({recipeData, user}) => {  
     return(
         <>
         <li>
@@ -17,10 +11,8 @@ const SavedRecipeItem = ({recipeData, user}) => {
         <img src={recipeData.image_url}></img>
         <br></br>
         <a href={recipeData.link}>visit this recipe</a>
-
-  
-      
-        <button className="remove" onClick={() => {addRecipeFavourite(recipeData.id, user.id)}}>Add to favourites</button>
+        <br></br>
+        <button className="remove" onClick={() => {addRecipeFavourite(recipeData.id, user)}}>Add to favourites</button>
         </div>
         </li>
         </>
