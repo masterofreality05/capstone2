@@ -1,13 +1,17 @@
 
 import SearchRecipeForm from "./forms/SearchRecipeForm"
 import RecipeList from "./RecipeList"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import AppContext from "./AppContext"
 
 const Home = () => {
    let [searchedRecipes, setSearchedRecipes] = useState(null)
+   let {user} = useContext(AppContext)
+   console.log("home component", user)
      return(
         <>
-        <h1>Make your own custom cookbook, store items in your fridges and get recommendations based on your taste</h1>
+        {user?<h1>Hi there {user.username}, welcome back!</h1>: <h1>Login to get started</h1>}
+       
         <div className="recipe-search"> 
         <SearchRecipeForm setSearchedRecipes={setSearchedRecipes}/>
         {searchedRecipes !== null?<RecipeList searchedRecipes={searchedRecipes}/>:<p></p>}  

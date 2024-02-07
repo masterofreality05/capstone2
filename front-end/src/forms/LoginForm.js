@@ -3,6 +3,7 @@ import {useFormik} from 'formik';
 import basicLoginSchema from '../schemas/loginSchema';
 import axios from 'axios';
 import AppContext from '../AppContext';
+import { useNavigate } from 'react-router-dom';
 const inputs = ["username", "password"]
 const initalializers =  {
     username:"",
@@ -10,6 +11,7 @@ const initalializers =  {
 }
 
 function LoginForm(){
+    const navigate = useNavigate();
     let {setUser} = useContext(AppContext) 
     let [failedValidation, setFailedValidation] = useState(false)
 
@@ -33,7 +35,8 @@ function LoginForm(){
             setUser({username: values.username,
                 id: user.data.user.id,
                 token :loggedIn.data.token})
-        }         
+        } 
+        navigate("/")        
             }
 
     let {errors, touched, values, handleChange, handleBlur} = useFormik({

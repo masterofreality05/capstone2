@@ -1,8 +1,10 @@
 .App {
   max-width: 50%;
   align-self: center;
+  margin: auto;
   justify-content: center;
   text-align: center;
+  padding: 10px;
   border: 2px solid purple;
   background-color: lightgreen;
 }

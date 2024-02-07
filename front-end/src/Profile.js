@@ -8,9 +8,7 @@ const Profile = () => {
     let {user} = useContext(AppContext)
     let[userData, setUserData] = useState(null)
     let [fridgeItems, setFridgeItems] = useState()
-
     useEffect(() => {
-        
         async function getUser(){
             if(user !== null){
                 const config = { headers: { Authorization: `Bearer ${user.token}`}};
@@ -20,7 +18,6 @@ const Profile = () => {
         }
         getUser()
     },[fridgeItems])
-
     return(
         <>
         <UserContext.Provider value={{userData, setFridgeItems}}>

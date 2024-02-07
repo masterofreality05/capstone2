@@ -2,13 +2,14 @@ import axios from "axios";
 
 const addRecipeFavourite = async(recipe, userID) => {
     console.log(userID)
+    console.log("typeof recioe", recipe)
    
 
-    if(!recipe.id){
+    if(recipe.label){
         let recipeInDB = await axios.get(`http://localhost:3001/recipes/${recipe.label}`)
-        
-        recipe = recipeInDB.data.id
         console.log("RECIPE IS HERE", recipeInDB)
+        recipe = recipeInDB.data.id
+      
     } else {
         recipe = recipe.id
     }

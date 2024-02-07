@@ -6,7 +6,6 @@ import appContext from "./AppContext"
 
 const RecipeList = ({searchedRecipes}) => {
     let user = useContext(appContext)
-    console.log("recipe list", searchedRecipes)
     return(
         <>
           <ul>

@@ -1,6 +1,9 @@
 .navlink-amatic {
     font-family: "Amatic";
     font-weight: bold;
+    margin-right: 20px;
+    margin-left: 20px;
+
    
 }
 
@@ -8,7 +11,17 @@
     font-size: 2em;
     transition: 0.5s;
    
+    
    
+   
+}
+
+.centre {
+    justify-content: center;
+    margin: auto;
+    padding:20px;
+    align-content: center;
+    background-color: rebeccapurple;
 }
 
 @font-face {

@@ -6,7 +6,7 @@ import "./Navbar.css"
 const Navbar = () => {
     const {user} = useContext(AppContext)
     return(
-    <div className="navbar navbar-expand-lg navbar-light bg-light">
+    <div className="navbar navbar-expand-lg navbar-light bg-light centre">
         <NavLink to="/" className="navbar-brand navlink-amatic">Home</NavLink>
         <NavLink to="/ingrediants" className="navbar-brand navlink-amatic">ingrediants</NavLink>
         <NavLink to="/recipes" className="navbar-brand navlink-amatic">Recipes</NavLink>

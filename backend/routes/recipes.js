@@ -17,13 +17,12 @@ router.get("/", async function (req, res, next) {
   }
 });
 /**Add
-
 /**This route will be used to get the recipes saved to the favourites of a user */
 router.get("/:recipe", async function (req, res, next) {
     try{
         //commented out for the moment ensureCorrectUserOrAdmin
         let userRecipes = await Recipe.get(req.params.recipe)
-        return res.json(userRecipes.data)
+        return res.json(userRecipes)
     } catch (err) {
       return next(err);
     }
