@@ -11,7 +11,8 @@ const RecipePage = () => {
 
     useEffect(() => {
         async function getRecipes(){
-          let recipes = await axios.get("http://localhost:3001/recipes/")
+            //
+          let recipes = await axios.get("https://whats-in-my-fridge-zx9p.onrender.com/ingrediants")
           setRecipesInDb(recipes.data)
     }
     getRecipes()} 

@@ -13,7 +13,8 @@ function getDatabaseUri() {
       ? "postgresql:///fridge_test"
       : process.env.DATABASE_URL || "postgresql:///fridge";
 }
-
+//interal db uri postgres://whats_in_my_fridge_db_user:OdrlZ6X2nFSfvLIHN4dPc8eMhs24FbiF@dpg-cn1mn0icn0vc73f9orrg-a/whats_in_my_fridge_db
+//external db uri postgres://whats_in_my_fridge_db_user:OdrlZ6X2nFSfvLIHN4dPc8eMhs24FbiF@dpg-cn1mn0icn0vc73f9orrg-a.frankfurt-postgres.render.com/whats_in_my_fridge_db
 // Speed up bcrypt during tests, since the algorithm safety isn't being tested
 //
 // WJB: Evaluate in 2021 if this should be increased to 13 for non-test use

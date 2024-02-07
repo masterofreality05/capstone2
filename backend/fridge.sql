@@ -5,11 +5,9 @@ DROP DATABASE fridge;
 CREATE DATABASE fridge;
 \connect fridge 
 
-
 CREATE TABLE ingrediants (
   id SERIAL PRIMARY KEY,
   item_name TEXT NOT NULL
- 
 );
 
 CREATE TABLE recipes (
